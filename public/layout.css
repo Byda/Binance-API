@@ -1,0 +1,6 @@
+body{background-color: aqua;}
+#left{width: 70%; min-height: 700px; float: left;}
+#right{width: 30%; min-height: 700px; float: right; background-color: blueviolet ;}
+div, h2 {text-align: center;}
+h3 {font-size: xx-large; text-align: center;}
+#Amount {margin: 20px;}

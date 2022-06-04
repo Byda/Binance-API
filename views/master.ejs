@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:3000/">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance API</title>
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="./layout.css" rel="stylesheet">
+    <script>
+        var socket = io("http://localhost:3000/")
+
+        socket.on("server-liveBTC", function(data){
+            $("h2").html(data.Currency);
+            $("h3").html(data.Price)
+        })
+
+        $(document).ready(function(){
+            $("#btnBUY").click(function(){
+                var amount = parseFloat($("#txtAmount").val());
+                
+                $.get("./buy/"+amount, function(data){
+                    console.log(data)
+                });
+
+                $("h4").html(amount)
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="left">
+            <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+    <div id="tradingview_86033"></div>
+    <div class="tradingview-widget-copyright"><a href="https://vn.tradingview.com/symbols/BTCUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">BTCUSDT Biểu đồ</span> </a> bởi TradingView</div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget(
+    {
+    "width": 1000,
+    "height": 700,
+    "symbol": "BINANCE:BTCUSDT",
+    "interval": "240",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "theme": "dark",
+    "style": "1",
+    "locale": "vi_VN",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_86033"
+  }
+    );
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+        </div>
+        <div id="right">
+            <h2></h2>
+            <h3></h3>
+            <h4></h4>
+
+            <div id="Amount">
+                <input type="text" id="txtAmount" placeholder="Amount of Bitcoin">
+            </div>
+
+            <div>
+                <input type="button" id="btnBUY" value="BUY">
+                <input type="button" id="btnSELL" value="SELL">
+            </div>
+
+        
+        </div>
+
+    </div>
+</body>
+</html>
